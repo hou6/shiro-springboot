@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:shiro="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>首页</title>
+</head>
+<body>
+<h1>首页</h1>
+
+<div th:if="${session.loginUser == null}">
+    <a th:href="@{toLogin}">登录</a>
+</div>
+
+<div>
+    <a th:href="@{/regist}">注册用户</a>
+</div>
+
+<p th:text="${msg}"></p>
+
+<hr>
+<div shiro:hasPermission="user:add">
+    <a th:href="@{user/add}">add功能</a>
+</div>
+
+<hr>
+
+<div shiro:hasPermission="user:update">
+    <a th:href="@{user/update}">update功能</a>
+</div>
+
+<!--  -->
+<!--欢迎您，<div th:text="${session.loginUser.name}"></div>-->
+<shiro:user>
+    <div th:if="${session.loginUser != null}">
+        <a th:href="@{logout}">登出</a>
+    </div>
+</shiro:user>
+
+</body>
+</html>
